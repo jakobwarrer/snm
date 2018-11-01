@@ -11,7 +11,20 @@ class MTGCardList extends Component<any, { setCards: Card[] }> {
   }
 
   componentDidMount() {
-    this.getAllCards();
+    var jsonData = require("../grn.json");
+    // this.getAllCards();
+    this.setState({
+      setCards: jsonData
+    });
+    // fetch("../grn.json", {
+    //   headers: {
+    //     "Content-Type": "application/json; charset=utf-8"
+    //   }
+    // }).then(response => console.log(response.json()));
+    // .then(findresponse => {
+    //   console.log(findresponse.title);
+    // });
+    // this.setState({ setCards: JSON.parse(grn)});
   }
 
   componentWillUnmount() {
@@ -29,16 +42,18 @@ class MTGCardList extends Component<any, { setCards: Card[] }> {
 
   private getSingleCard(step: number, count: number) {
     if (!localStorage.getItem(step.toString())) {
-      return Cards.bySet("grn", step)
-        .then(card => {
-          this.setState({ setCards: [...this.state.setCards, card] });
-          localStorage.setItem(step.toString(), JSON.stringify(card));
-        })
-        .then(() => {
-          if (step < count) {
-            this.getSingleCard(step + 1, count);
-          }
-        });
+      setTimeout(() => {
+        return Cards.bySet("grn", step)
+          .then(card => {
+            this.setState({ setCards: [...this.state.setCards, card] });
+            localStorage.setItem(step.toString(), JSON.stringify(card));
+          })
+          .then(() => {
+            if (step < count) {
+              this.getSingleCard(step + 1, count);
+            }
+          });
+      }, 50);
     } else {
       this.getStoredCard(step).then(() => {
         if (step < count) {
