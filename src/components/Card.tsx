@@ -1,7 +1,6 @@
 import React, { Component, ReactText } from 'react';
-import { Card } from 'scryfall-sdk';
 
-class MTGCard extends Component<{ card: Card }> {
+class MTGCard extends Component<any, any> {
   interval: any;
   constructor(props) {
     super(props);

@@ -7,10 +7,10 @@ import MTGCardList from './components/CardList';
 import CountDownTimer from './components/CountDownTimer';
 
 // import Promise from 'promise-polyfill';
-class App extends Component<any, { count: number; setCards: Card[] }> {
+class App extends Component<any, { count: number }> {
   constructor(props: any) {
     super(props);
-    this.state = { count: 0, setCards: [] };
+    this.state = { count: 0 };
   }
   componentDidMount() {}
 
